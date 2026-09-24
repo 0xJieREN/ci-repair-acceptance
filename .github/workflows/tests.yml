@@ -1,0 +1,36 @@
+name: tests
+on:
+  push:
+permissions:
+  contents: read
+jobs:
+  math:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Math tests
+        run: python -m unittest tests.test_mathutil -v
+  text:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Text tests
+        run: python -m unittest tests.test_text -v
+  report:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Report tests
+        run: python -m unittest tests.test_report -v
